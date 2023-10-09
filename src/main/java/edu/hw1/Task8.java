@@ -39,7 +39,7 @@ public class Task8 {
     }
 
     private static boolean checkItem(final int[][] board, final int i, final int j) {
-        ArrayList<Coordinates> coordinates = getCoordinates(board, i, j);
+        ArrayList<Coordinates> coordinates = getCoordinates(i, j);
         for (Coordinates coordinate : coordinates) {
             if (coordinate.x >= 0 && coordinate.x < MATRIX_SIZE
                 && coordinate.y >= 0 && coordinate.y < MATRIX_SIZE) {
@@ -51,7 +51,7 @@ public class Task8 {
         return false;
     }
 
-    private static ArrayList<Coordinates> getCoordinates(final int[][] board, final int i, final int j) {
+    private static ArrayList<Coordinates> getCoordinates(final int i, final int j) {
         ArrayList<Coordinates> result = new ArrayList<>();
         result.add(new Coordinates(i + 2, j + 1));
         result.add(new Coordinates(i + 2, j - 1));

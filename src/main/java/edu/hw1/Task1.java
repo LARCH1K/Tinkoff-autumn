@@ -16,11 +16,10 @@ public class Task1 {
         } catch (NumberFormatException exception) {
             throw new IllegalArgumentException("The input should look like 'minutes:secondes'");
         }
-        int result = 0;
         if (secondes >= SECONDS_IN_MINUTE || secondes < 0 || minutes < 0) {
             return -1;
         }
-        result = minutes * SECONDS_IN_MINUTE + secondes;
+        int result = minutes * SECONDS_IN_MINUTE + secondes;
         return result;
     }
 }
