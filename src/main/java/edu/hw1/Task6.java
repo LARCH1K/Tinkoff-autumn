@@ -1,8 +1,6 @@
 package edu.hw1;
 
 import java.util.Arrays;
-import java.util.Comparator;
-import java.util.stream.IntStream;
 
 public class Task6 {
     private Task6() {
@@ -28,17 +26,13 @@ public class Task6 {
 
     private static int countKaprekara(final int number, final int i) {
         int value = number;
-        value = sortNumberDESC(value) - sortNumberASC(value);
+        int[] arrayASC = numberToArray(number);
+        Arrays.sort(arrayASC);
+        value = reverseArrayToNumber(arrayASC) - arrayToNumber(arrayASC);
         if (value == KAPREKARS_NUMBER) {
             return i;
         }
         return countKaprekara(value, i + 1);
-    }
-
-    private static int sortNumberASC(final int number) {
-        int[] array = numberToArray(number);
-        Arrays.sort(array);
-        return arrayToNumber(array);
     }
 
     private static int arrayToNumber(final int[] array) {
@@ -49,14 +43,12 @@ public class Task6 {
         return number;
     }
 
-    private static int sortNumberDESC(final int number) {
-        int[] array = numberToArray(number);
-        array = IntStream.of(array)
-            .boxed()
-            .sorted(Comparator.reverseOrder())
-            .mapToInt(i -> i)
-            .toArray();
-        return arrayToNumber(array);
+    private static int reverseArrayToNumber(final int[] array) {
+        int number = 0;
+        for (int i = FOUR_DIGITS_IN_NUMBER - 1; i >= 0; i--) {
+            number = number * DECIMAL_NUMBER_SYSTEM + array[i];
+        }
+        return number;
     }
 
     private static int[] numberToArray(final int value) {

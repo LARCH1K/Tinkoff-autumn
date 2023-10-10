@@ -9,10 +9,9 @@ public class Task7 {
             throw new IllegalArgumentException();
         }
         String binaryNumber = Integer.toBinaryString(n);
-        char[] arrayOfNumbers = binaryNumber.toCharArray();
-        char[] resultArray = new char[arrayOfNumbers.length];
-        for (int i = 0; i < arrayOfNumbers.length; i++) {
-            resultArray[(i + shift) % arrayOfNumbers.length] = arrayOfNumbers[i];
+        char[] resultArray = new char[binaryNumber.length()];
+        for (int i = 0; i < binaryNumber.length(); i++) {
+            resultArray[(i + shift) % binaryNumber.length()] = binaryNumber.charAt(i);
         }
         return Integer.parseInt(new String(resultArray), 2);
     }
@@ -21,13 +20,7 @@ public class Task7 {
         if (n <= 0 || shift < 0) {
             throw new IllegalArgumentException();
         }
-        String binaryNumber = Integer.toBinaryString(n);
-        char[] arrayOfNumbers = binaryNumber.toCharArray();
-        char[] resultArray = new char[arrayOfNumbers.length];
-        for (int i = 0; i < arrayOfNumbers.length; i++) {
-            resultArray[(i + arrayOfNumbers.length - shift % arrayOfNumbers.length) % arrayOfNumbers.length] =
-                arrayOfNumbers[i];
-        }
-        return Integer.parseInt(new String(resultArray), 2);
+        int countDigitsInBinaryNumber = Integer.toBinaryString(n).length();
+        return rotateRight(n, countDigitsInBinaryNumber - (shift % countDigitsInBinaryNumber));
     }
 }

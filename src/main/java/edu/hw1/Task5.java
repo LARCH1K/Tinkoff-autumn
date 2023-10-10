@@ -43,7 +43,7 @@ public class Task5 {
 
     private static int[] numberToArray(final int value) {
         int number = value;
-        int count = countDigits(number);
+        int count = Task2.countDigits(number);
         int[] arrayNumbers = new int[count];
         for (int i = count - 1; i >= 0; i--) {
             arrayNumbers[i] = number % DECIMAL_NUMBER_SYSTEM;
@@ -61,13 +61,4 @@ public class Task5 {
         return true;
     }
 
-    private static int countDigits(int number) {
-        int value = number;
-        int count = 0;
-        do {
-            value /= DECIMAL_NUMBER_SYSTEM;
-            count++;
-        } while (value != 0);
-        return count;
-    }
 }
