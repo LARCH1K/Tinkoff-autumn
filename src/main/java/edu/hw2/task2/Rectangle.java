@@ -5,24 +5,19 @@ public class Rectangle {
     final private int height;
 
     public Rectangle(final int width, final int height) {
-        if (width < 0 || height < 0) {
+        if (width <= 0 || height <= 0) {
             throw new IllegalArgumentException();
         }
         this.width = width;
         this.height = height;
     }
 
-    public Rectangle() {
-        this.width = 0;
-        this.height = 0;
+    final public int getWidth() {
+        return width;
     }
 
-    public Rectangle setWidth(int width) {
-        return new Rectangle(width, this.height);
-    }
-
-    public Rectangle setHeight(int height) {
-        return new Rectangle(this.width, height);
+    final public int getHeight() {
+        return height;
     }
 
     public double area() {

@@ -1,33 +1,26 @@
 package edu.hw2;
 
-import edu.hw1.Task3;
+
 import edu.hw2.task2.Rectangle;
 import edu.hw2.task2.Square;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.params.ParameterizedTest;
-import org.junit.jupiter.params.provider.Arguments;
-import org.junit.jupiter.params.provider.MethodSource;
 import static org.assertj.core.api.AssertionsForClassTypes.assertThat;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 public class Task2Test {
 
-    static Arguments[] rectangles() {
-        return new Arguments[] {
-            Arguments.of(new Rectangle()),
-            Arguments.of(new Square())
-        };
-    }
-
-    @ParameterizedTest
+    @Test
     @DisplayName("Test from task")
-    @MethodSource("rectangles")
-    void rectangleArea(Rectangle rect) {
-        rect = rect.setWidth(20);
-        rect = rect.setHeight(10);
-
-        assertThat(rect.area()).isEqualTo(200.0);
+    void rectangleArea() {
+        Rectangle rect = new Rectangle(10,10);
+        assertThat(rect.area()).isEqualTo(100);
+        rect = new Rectangle(20,10);
+        assertThat(rect.area()).isEqualTo(200);
+        Square square = new Square(10);
+        assertThat(square.area()).isEqualTo(100);
+        square = new Square(20);
+        assertThat(square.area()).isEqualTo(400);
     }
 
     @Test
@@ -36,13 +29,15 @@ public class Task2Test {
         assertThrows(IllegalArgumentException.class, () -> new Rectangle(-2, -6));
         assertThrows(IllegalArgumentException.class, () -> new Rectangle(8, -7));
         assertThrows(IllegalArgumentException.class, () -> new Rectangle(-16, 47));
+        assertThrows(IllegalArgumentException.class, () -> new Rectangle(0, 47));
+        assertThrows(IllegalArgumentException.class, () -> new Rectangle(16, 0));
     }
 
     @Test
-    @DisplayName("Test constructor of Square with different values")
+    @DisplayName("Test constructor of Square with negate values")
     void constructorOfSquareWithDifferentValuesTest() {
-        assertThrows(IllegalArgumentException.class, () -> new Square(2, 6));
-        assertThrows(IllegalArgumentException.class, () -> new Square(8, 7));
-        assertThrows(IllegalArgumentException.class, () -> new Square(16, 47));
+        assertThrows(IllegalArgumentException.class, () -> new Square(-8));
+        assertThrows(IllegalArgumentException.class, () -> new Square(-9));
+        assertThrows(IllegalArgumentException.class, () -> new Square(0));
     }
 }
