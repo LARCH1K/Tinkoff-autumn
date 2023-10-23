@@ -1,8 +1,8 @@
 package edu.hw2.task2;
 
 public class Rectangle {
-    final private int width;
-    final private int height;
+    protected final int width;
+    protected final int height;
 
     public Rectangle(final int width, final int height) {
         if (width <= 0 || height <= 0) {
@@ -12,12 +12,12 @@ public class Rectangle {
         this.height = height;
     }
 
-    final public int getWidth() {
-        return width;
+    public Rectangle setWidth(int width) {
+        return new Rectangle(width, this.height);
     }
 
-    final public int getHeight() {
-        return height;
+    public Rectangle setHeight(int height) {
+        return new Rectangle(this.width, height);
     }
 
     public double area() {
