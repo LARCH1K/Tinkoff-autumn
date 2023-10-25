@@ -1,6 +1,6 @@
 package edu.hw3.Task6;
 
-interface StockMarket {
+public interface StockMarket {
     void add(Stock stock);
 
     void remove(Stock stock);

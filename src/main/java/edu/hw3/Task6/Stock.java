@@ -2,7 +2,7 @@ package edu.hw3.Task6;
 
 import java.util.Objects;
 
-record Stock(String name, double price) implements Comparable<Stock> {
+public record Stock(String name, double price) implements Comparable<Stock> {
 
     @Override
     public boolean equals(final Object o) {

@@ -1,17 +1,17 @@
 package edu.hw3;
 
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Comparator;
 
 public class Task5 {
     private Task5() {
     }
 
-    static ArrayList<Person> parseContacts(String[] names, String sortOrder) {
+    static Person[] parseContacts(String[] names, String sortOrder) {
         if (names == null) {
-            return new ArrayList<Person>();
+            return new Person[] {};
         }
-        ArrayList<Person> result = convertToPersonArrayList(names);
+        Person[] result = convertToPersonArray(names);
         Comparator<Person> nameComparator = (firstPerson, secondPerson) -> {
             String compareFirst = firstPerson.lastName;
             if (firstPerson.lastName.isEmpty()) {
@@ -30,18 +30,18 @@ public class Task5 {
                     + "Используйте \"ASC\" или \"DESC\".");
             }
         };
-        result.sort(nameComparator);
+        Arrays.sort(result, nameComparator);
         return result;
     }
 
-    private static ArrayList<Person> convertToPersonArrayList(String[] names) {
-        ArrayList<Person> result = new ArrayList<>();
-        for (final String name : names) {
-            String[] parts = name.split(" ");
+    private static Person[] convertToPersonArray(String[] names) {
+        Person[] result = new Person[names.length];
+        for (int i = 0; i < names.length; i++) {
+            String[] parts = names[i].split(" ");
             if (parts.length == 2) {
-                result.add(new Person(parts[0], parts[1]));
+                result[i] = (new Person(parts[0], parts[1]));
             } else if (parts.length == 1) {
-                result.add(new Person(parts[0], ""));
+                result[i] = (new Person(parts[0], ""));
             } else {
                 throw new IllegalArgumentException();
             }
@@ -49,10 +49,10 @@ public class Task5 {
         return result;
     }
 
-    private record Person(String firstName, String lastName) {
+    record Person(String firstName, String lastName) {
         @Override public String toString() {
             return "\"" + firstName + ' ' + lastName + "\"";
-            }
         }
+    }
 
 }

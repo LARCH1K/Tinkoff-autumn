@@ -11,6 +11,9 @@ public class Task2 {
     }
 
     static ArrayList<String> clusterize(String string) {
+        if (string == null) {
+            throw new IllegalArgumentException();
+        }
         ArrayList<String> result = new ArrayList<>();
         Stack<Character> stack = new Stack<>();
         StringBuilder currentCluster = new StringBuilder();

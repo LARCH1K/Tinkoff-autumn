@@ -5,6 +5,9 @@ public class Task1 {
     }
 
     static String atbash(String string) {
+        if (string == null) {
+            throw new IllegalArgumentException();
+        }
         char[] result = string.toCharArray();
         for (int i = 0; i < result.length; i++) {
             if (Character.isLetter(result[i])) {
