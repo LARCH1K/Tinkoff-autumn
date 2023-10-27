@@ -1,8 +1,8 @@
 package edu.hw4;
 
-import static edu.hw4.Animal.Sex.M;
 
 public record Animal(
+
     String name,
     Type type,
     Sex sex,
@@ -11,6 +11,10 @@ public record Animal(
     int weight,
     Boolean bites
 ) {
+    private final static int COUNT_DOG_OR_CATS_PAWS = 4;
+
+    private final static int COUNT_SPIDER_PAWS = 8;
+
     enum Type {
         CAT, DOG, BIRD, FISH, SPIDER
     }
@@ -21,10 +25,10 @@ public record Animal(
 
     public int paws() {
         return switch (type) {
-            case CAT, DOG -> 4;
+            case CAT, DOG -> COUNT_DOG_OR_CATS_PAWS;
             case BIRD -> 2;
             case FISH -> 0;
-            case SPIDER -> 8;
+            case SPIDER -> COUNT_SPIDER_PAWS;
         };
     }
 
