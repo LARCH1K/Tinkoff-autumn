@@ -91,7 +91,8 @@ public class TasksFrom16To20Test {
         assertThat(result.containsKey(null)).isEqualTo(true);
 
         assertThat(result.get("Goldie")).isEqualTo("HEIGHT_IS_NEGATIVE");
-        assertThat(result.get("Tweetie")).isEqualTo("TYPE_IS_NULL, AGE_IS_NEGATIVE");
+        assertThat(result.get("Tweetie").matches("TYPE_IS_NULL, AGE_IS_NEGATIVE|AGE_IS_NEGATIVE, TYPE_IS_NULL"))
+            .isEqualTo(true);
         assertThat(result.get(null)).isEqualTo("NAME_IS_NULL");
     }
 }
