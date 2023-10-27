@@ -13,18 +13,14 @@ public class Hangman {
             LOGGER.info("\nTo give up, send '!giveUp'");
             Session session = new Session(new RightDictionary());
             GuessResult gameState = tryGuess(session, SCANNER);
-            while (true) {
-                if (gameState.getClass() == GuessResult.GiveUp.class) {
-                    LOGGER.info(gameState.message(session));
-                    break;
-                }
+            while (gameState.getClass() != GuessResult.GiveUp.class && gameState.getClass() != GuessResult.Win.class
+                && gameState.getClass() != GuessResult.Defeat.class) {
                 session.printState();
                 LOGGER.info(gameState.message(session));
-                if (gameState.getClass() == GuessResult.Win.class || gameState.getClass() == GuessResult.Defeat.class) {
-                    break;
-                }
                 gameState = tryGuess(session, SCANNER);
             }
+            session.printState();
+            LOGGER.info(gameState.message(session));
         }
     }
 
