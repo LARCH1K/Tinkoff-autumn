@@ -1,4 +1,4 @@
-package edu.project2;
+package edu.project2.components;
 
 public final class Maze {
     private final int height;
@@ -23,16 +23,6 @@ public final class Maze {
         return grid;
     }
 
-    public boolean isIn(Coordinate coordinate) {
-        return coordinate.col() >= 0 && coordinate.row() >= 0 && coordinate.col() < width && coordinate.row() < height;
-    }
-
-    public Cell.Type getCellType(Coordinate coordinate) {
-        return grid[coordinate.row()][coordinate.col()].type();
-    }
-    public boolean isIn(int col, int row) {
-        return col >= 0 && row >= 0 && col < width && row < height;
-    }
 }
 
 
