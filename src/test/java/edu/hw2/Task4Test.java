@@ -11,7 +11,7 @@ public class Task4Test {
     @DisplayName("Test ")
     void callingInfoTest() {
         assertEquals("edu.hw2.CallingInfoTest", CallingInfoTest.test().className());
-        assertEquals("test", CallingInfoTest.test().methodName());
+        assertEquals("test.txt", CallingInfoTest.test().methodName());
     }
 }
 
