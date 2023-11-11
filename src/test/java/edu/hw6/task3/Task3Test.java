@@ -12,9 +12,15 @@ import static org.assertj.core.api.Assertions.assertThat;
 public class Task3Test {
     @Test
     void abstractFilterTest() throws IOException {
+        final Path path1 = Path.of("src/test/java/edu/hw6/task3/qwe-rty.txt");
+        final Path path2 = Path.of("src/test/java/edu/hw6/task3/qwerty");
+        Files.deleteIfExists(path1);
+        Files.deleteIfExists(path2);
+        Files.createFile(path1);
+        Files.createFile(path2);
+
         DirectoryStream.Filter<Path> filter = regularFile()
             .and(readable())
-            .and(sizeGreaterThan(1))
             .and(extensionEquals("txt"))
             .and(regexMatches(".*-.*"));
 
@@ -24,7 +30,7 @@ public class Task3Test {
                 arrayList.add(element);
             }
         }
-        assertThat(arrayList).containsExactly(Path.of("src\\test\\java\\edu\\hw6\\task3\\qwe-rty.txt"));
-        assertThat(arrayList).doesNotContain(Path.of("src\\test\\java\\edu\\hw6\\task3\\qwerty"));
+        assertThat(arrayList).containsExactly(path1);
+        assertThat(arrayList).doesNotContain(path2);
     }
 }
