@@ -72,7 +72,8 @@ public class MdWriter implements OutputWriter {
         result.append("| Конечная дата        | ")
             .append(logStatistics.getToDate() == null ? "-" : logStatistics.getToDate()).append(" |\n");
         result.append("| Количество запросов  | ").append(logStatistics.getTotalRequests()).append(" |\n");
-        result.append("| Средний размер ответа| ").append(String.format("%.2f", logStatistics.getAverageResponseSize()))
+        result.append("| Средний размер ответа| ")
+            .append(String.format("%.2f", logStatistics.getAverageResponseSize()).replace(',', '.'))
             .append("b |\n");
     }
 }

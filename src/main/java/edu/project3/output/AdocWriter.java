@@ -79,7 +79,7 @@ public class AdocWriter implements OutputWriter {
             .append("\n");
         result.append("| Количество запросов | ").append(logStatistics.getTotalRequests()).append("\n");
         result.append("| Средний размер ответа | ")
-            .append(String.format("%.2f", logStatistics.getAverageResponseSize())).append("b\n");
+            .append(String.format("%.2f", logStatistics.getAverageResponseSize()).replace(',', '.')).append("b\n");
         result.append("|===\n\n");
     }
 }
