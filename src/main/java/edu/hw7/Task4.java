@@ -11,31 +11,6 @@ public class Task4 {
     private Task4() {
     }
 
-//    public static void main(String[] args) {
-//        int totalSimulations = 1000; // Количество симуляций
-//
-//        long startTime1 = System.currentTimeMillis();
-//        double piApproximation = calculatePi(totalSimulations);
-//        long endTime1 = System.currentTimeMillis();
-//
-//        System.out.println("Approximated Pi: " + piApproximation);
-//        System.out.println("Time taken (single-threaded): " + (endTime1 - startTime1) + " milliseconds");
-//
-//        // Многопоточная версия (пример)
-//        int numThreads = 4; // Количество потоков
-//        long startTime2 = System.currentTimeMillis();
-//        double piApproximationMultiThreaded = calculatePiMultiThreaded(totalSimulations, numThreads);
-//        long endTime2 = System.currentTimeMillis();
-//
-//        System.out.println("Approximated Pi (multi-threaded): " + piApproximationMultiThreaded);
-//        System.out.println(
-//            "Time taken (multi-threaded, " + numThreads + " threads): " + (endTime2 - startTime2) + " milliseconds");
-//
-//        // Рассчет ускорения
-//        double speedup = (double) (endTime1 - startTime1) / (double) (endTime2 - startTime2);
-//        System.out.println("Speedup: " + speedup);
-//    }
-
     public static double calculatePi(int totalSimulations) {
         if (totalSimulations <= 0) {
             throw new IllegalArgumentException();

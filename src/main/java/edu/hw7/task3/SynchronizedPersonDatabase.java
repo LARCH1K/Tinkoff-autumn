@@ -88,11 +88,4 @@ public class SynchronizedPersonDatabase implements PersonDatabase {
         }
         return null;
     }
-
-//    public static void main(String[] args) {
-//        SynchronizedPersonDatabase personDatabase = new SynchronizedPersonDatabase();
-//        personDatabase.add(new Person(1, "111", "qqq", "7987"));
-//        personDatabase.add(new Person(2, "222", "www", "7234"));
-//        System.out.println(personDatabase.findByName("222"));
-//    }
 }

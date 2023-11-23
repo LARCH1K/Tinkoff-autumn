@@ -2,14 +2,13 @@ package edu.hw7;
 
 import edu.hw7.task3.Person;
 import edu.hw7.task3.PersonDatabase;
+import edu.hw7.task3.ReadWriteLockPersonDatabase;
 import edu.hw7.task3.SynchronizedPersonDatabase;
+import java.util.concurrent.atomic.AtomicInteger;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.Mockito;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.mockito.Mockito.*;
 
 public class Task3Test {
     private PersonDatabase personDatabase;
@@ -82,30 +81,98 @@ public class Task3Test {
     }
 
     @Test
-    public void testConcurrentAddAndFind() {
-        PersonDatabase spyDatabase = Mockito.spy(personDatabase);
+    public void synchronizedPersonDatabaseConcurrentAddAndFindTest() {
+        AtomicInteger errorsCount = new AtomicInteger(0);
+        final int triesCount = 10000;
 
-        Person person = new Person(1, "John", "123 Main St", "555-1234");
+        for (int i = 0; i < triesCount; i++) {
 
-        Thread addThread = new Thread(() -> {
-            spyDatabase.add(person);
-        });
+            SynchronizedPersonDatabase personDatabase = new SynchronizedPersonDatabase();
+            Thread adder = new Thread(() -> {
+                Person person1 = new Person(1, "John", "123 Main St", "555-1234");
+                Person person2 = new Person(2, "Jane", "456 Oak St", "555-5678");
 
-        Thread findThread = new Thread(() -> {
-            spyDatabase.findByName("John");
-        });
+                personDatabase.add(person1);
+                personDatabase.add(person2);
+            });
 
-        addThread.start();
-        findThread.start();
+            Thread checker1 = new Thread(() -> {
 
-        try {
-            addThread.join();
-            findThread.join();
-        } catch (InterruptedException e) {
-            throw new RuntimeException(e);
+                if (personDatabase.findByName("John") != null) {
+                    if (personDatabase.findByAddress("123 Main St") == null) {
+                        errorsCount.incrementAndGet();
+                    }
+                }
+            });
+
+            Thread checker2 = new Thread(() -> {
+                if (personDatabase.findByAddress("456 Oak St") != null) {
+                    if (personDatabase.findByPhone("555-5678") == null) {
+                        errorsCount.incrementAndGet();
+                    }
+                }
+            });
+
+            adder.start();
+            checker1.start();
+            checker2.start();
+            try {
+                adder.join();
+                checker1.join();
+                checker2.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
         }
 
-        verify(spyDatabase, times(1)).add(person);
-        verify(spyDatabase, times(1)).findByName("John");
+        assertEquals(0, errorsCount.get());
+    }
+
+    @Test
+    public void readWriteLockPersonDatabaseConcurrentAddAndFindTest() {
+        AtomicInteger errorsCount = new AtomicInteger(0);
+        final int triesCount = 10000;
+
+        for (int i = 0; i < triesCount; i++) {
+
+            ReadWriteLockPersonDatabase personDatabase = new ReadWriteLockPersonDatabase();
+            Thread adder = new Thread(() -> {
+                Person person1 = new Person(1, "John", "123 Main St", "555-1234");
+                Person person2 = new Person(2, "Jane", "456 Oak St", "555-5678");
+
+                personDatabase.add(person1);
+                personDatabase.add(person2);
+            });
+
+            Thread checker1 = new Thread(() -> {
+
+                if (personDatabase.findByName("John") != null) {
+                    if (personDatabase.findByAddress("123 Main St") == null) {
+                        errorsCount.incrementAndGet();
+                    }
+                }
+            });
+
+            Thread checker2 = new Thread(() -> {
+                if (personDatabase.findByAddress("456 Oak St") != null) {
+                    if (personDatabase.findByPhone("555-5678") == null) {
+                        errorsCount.incrementAndGet();
+                    }
+                }
+            });
+
+            adder.start();
+            checker1.start();
+            checker2.start();
+            try {
+                adder.join();
+                checker1.join();
+                checker2.join();
+            } catch (InterruptedException e) {
+                throw new RuntimeException(e);
+            }
+        }
+
+        assertEquals(0, errorsCount.get());
     }
 }

@@ -22,8 +22,8 @@ public class Task2Test {
 
     @Test()
     public void calculateFactorialNegativeInputTest() {
-        assertThrows(IllegalArgumentException.class, ()->calculateFactorial(-1));
-        assertThrows(IllegalArgumentException.class, ()->calculateFactorial(-25));
+        assertThrows(IllegalArgumentException.class, () -> calculateFactorial(-1));
+        assertThrows(IllegalArgumentException.class, () -> calculateFactorial(-25));
     }
 
 }

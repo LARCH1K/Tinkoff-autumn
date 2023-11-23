@@ -16,10 +16,10 @@ public class Task1Test {
 
     @Test()
     public void threadSafeCounterInvalidArgumentsTest() {
-        assertThrows(IllegalArgumentException.class, ()->threadSafeCounter(-1, 1));
-        assertThrows(IllegalArgumentException.class, ()->threadSafeCounter(2, -4));
-        assertThrows(IllegalArgumentException.class, ()->threadSafeCounter(0, 1));
-        assertThrows(IllegalArgumentException.class, ()->threadSafeCounter(2, 0));
-        assertThrows(IllegalArgumentException.class, ()->threadSafeCounter(-4, -8));
+        assertThrows(IllegalArgumentException.class, () -> threadSafeCounter(-1, 1));
+        assertThrows(IllegalArgumentException.class, () -> threadSafeCounter(2, -4));
+        assertThrows(IllegalArgumentException.class, () -> threadSafeCounter(0, 1));
+        assertThrows(IllegalArgumentException.class, () -> threadSafeCounter(2, 0));
+        assertThrows(IllegalArgumentException.class, () -> threadSafeCounter(-4, -8));
     }
 }

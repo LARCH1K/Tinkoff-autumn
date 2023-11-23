@@ -32,8 +32,4 @@ public class Task1 {
 
         return counter.get();
     }
-
-//    public static void main(String[] args) {
-//        System.out.println(threadSafeCounter(100000, 5));
-//    }
 }

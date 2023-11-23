@@ -16,11 +16,4 @@ public class Task2 {
             .mapToObj(BigInteger::valueOf)
             .reduce(BigInteger.ONE, BigInteger::multiply);
     }
-
-//    public static void main(String[] args) {
-//        int n = 2;
-//
-//        BigInteger result = calculateFactorial(n);
-//        System.out.println("Factorial of " + n + " is: " + result);
-//    }
 }
