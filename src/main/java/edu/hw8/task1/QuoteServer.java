@@ -24,8 +24,7 @@ public class QuoteServer {
 
     public void run() {
         try (ExecutorService executorService = Executors.newFixedThreadPool(MAX_CONNECTIONS);
-             ServerSocket serverSocket = new ServerSocket(PORT
-             )) {
+             ServerSocket serverSocket = new ServerSocket(PORT)) {
             LOGGER.info("Сервер запущен. Ожидание подключений...");
 
             while (true) {
@@ -64,7 +63,7 @@ public class QuoteServer {
     private static String findQuoteByKeyword(String keyword) {
         for (String quote : QUOTES) {
             if (quote.contains(keyword)) {
-                return "Сервер: " + quote;
+                return quote;
             }
         }
         return "Сервер: К сожалению, цитата по данному ключевому слову не найдена.";
