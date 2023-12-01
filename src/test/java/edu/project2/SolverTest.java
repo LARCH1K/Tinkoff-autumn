@@ -16,8 +16,8 @@ public class SolverTest {
     Maze maze;
 
     @BeforeEach
-    void beforeEach(){
-        maze = new Maze(3,3);
+    void beforeEach() {
+        maze = new Maze(3, 3);
         initializeMaze(maze, 3, 3);
         maze.getGrid()[0][0].setType(Cell.Type.PASSAGE);
         maze.getGrid()[0][1].setType(Cell.Type.PASSAGE);
@@ -29,44 +29,44 @@ public class SolverTest {
     }
 
     @Test
-    void solverDFSTest(){
+    void solverDFSTest() {
         Solver solver = new DFSSolver();
-        List<Coordinate> path = solver.solve(maze, new Coordinate(1,1),new Coordinate(3,3));
+        List<Coordinate> path = solver.solve(maze, new Coordinate(1, 1), new Coordinate(3, 3));
         assertThat(path).hasSize(5)
-            .contains(new Coordinate(0,0))
-            .contains(new Coordinate(0,1))
-            .contains(new Coordinate(1,1))
-            .contains(new Coordinate(2,1))
-            .contains(new Coordinate(2,2));
+            .contains(new Coordinate(0, 0))
+            .contains(new Coordinate(0, 1))
+            .contains(new Coordinate(1, 1))
+            .contains(new Coordinate(2, 1))
+            .contains(new Coordinate(2, 2));
     }
 
     @Test
-    void waveSolverTest(){
+    void waveSolverTest() {
         Solver solver = new WaveSolver();
-        List<Coordinate> path = solver.solve(maze, new Coordinate(1,1),new Coordinate(3,3));
+        List<Coordinate> path = solver.solve(maze, new Coordinate(1, 1), new Coordinate(3, 3));
         assertThat(path).hasSize(5)
-            .contains(new Coordinate(0,0))
-            .contains(new Coordinate(0,1))
-            .contains(new Coordinate(1,1))
-            .contains(new Coordinate(2,1))
-            .contains(new Coordinate(2,2));
+            .contains(new Coordinate(0, 0))
+            .contains(new Coordinate(0, 1))
+            .contains(new Coordinate(1, 1))
+            .contains(new Coordinate(2, 1))
+            .contains(new Coordinate(2, 2));
     }
 
     @Test
-    void solverDFSWithInputWallCellTest(){
+    void solverDFSWithInputWallCellTest() {
         Solver solver = new DFSSolver();
-        List<Coordinate> path = solver.solve(maze, new Coordinate(2,1),new Coordinate(3,3));
+        List<Coordinate> path = solver.solve(maze, new Coordinate(2, 1), new Coordinate(3, 3));
         assertThat(path).isEmpty();
-        path = solver.solve(maze, new Coordinate(1,1),new Coordinate(2,3));
+        path = solver.solve(maze, new Coordinate(1, 1), new Coordinate(2, 3));
         assertThat(path).isEmpty();
     }
 
     @Test
-    void WaveSolverWithInputWallCellTest(){
+    void WaveSolverWithInputWallCellTest() {
         Solver solver = new DFSSolver();
-        List<Coordinate> path = solver.solve(maze, new Coordinate(2,1),new Coordinate(3,3));
+        List<Coordinate> path = solver.solve(maze, new Coordinate(2, 1), new Coordinate(3, 3));
         assertThat(path).isEmpty();
-        path = solver.solve(maze, new Coordinate(2,1),new Coordinate(2,3));
+        path = solver.solve(maze, new Coordinate(2, 1), new Coordinate(2, 3));
         assertThat(path).isEmpty();
     }
 

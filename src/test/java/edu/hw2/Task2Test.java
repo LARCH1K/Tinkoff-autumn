@@ -1,6 +1,5 @@
 package edu.hw2;
 
-
 import edu.hw2.task2.Rectangle;
 import edu.hw2.task2.Square;
 import org.junit.jupiter.api.DisplayName;
@@ -14,8 +13,8 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 public class Task2Test {
 
     static Arguments[] rectangles() {
-        return new Arguments[]{
-            Arguments.of(new Rectangle(1,1)),
+        return new Arguments[] {
+            Arguments.of(new Rectangle(1, 1)),
             Arguments.of(new Square(1))
         };
     }
