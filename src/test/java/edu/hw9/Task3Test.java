@@ -5,11 +5,10 @@ import edu.project2.components.Cell;
 import edu.project2.components.Coordinate;
 import edu.project2.components.Maze;
 import edu.project2.generators.DFSGenerator;
-import edu.project2.solvers.DFSSolver;
 import edu.project2.solvers.Solver;
+import java.util.List;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 public class Task3Test {
@@ -29,8 +28,9 @@ public class Task3Test {
     }
 
     @Test
-    void solverDFSTest() {
+    void parallelDFSSolverTest() {
         Solver solver = new ParallelDFSSolver(4);
+        //Координаты для удобства задаются от 1
         List<Coordinate> path = solver.solve(maze, new Coordinate(1, 1), new Coordinate(3, 3));
         assertThat(path).hasSize(5)
             .contains(new Coordinate(0, 0))
@@ -38,25 +38,11 @@ public class Task3Test {
             .contains(new Coordinate(1, 1))
             .contains(new Coordinate(2, 1))
             .contains(new Coordinate(2, 2));
-    }
 
-    @Test
-    void solverDSTest() {
-        Solver solver = new ParallelDFSSolver(4);
-        Solver solver2 = new DFSSolver();
+        solver = new ParallelDFSSolver(6);
         maze = new DFSGenerator().generate(1001, 1001);
-        long startTime1 = System.currentTimeMillis();
-        List<Coordinate> path = solver.solve(maze, new Coordinate(1, 1), new Coordinate(3, 3));
-        long endTime1 = System.currentTimeMillis();
-
-        long startTime2 = System.currentTimeMillis();
-        List<Coordinate> path2 = solver2.solve(maze, new Coordinate(1, 1), new Coordinate(3, 3));
-        long endTime2 = System.currentTimeMillis();
-
-        System.out.println(endTime1 - startTime1);
-        System.out.println(endTime2 - startTime2);
-
-        assertThat(path).isNotEmpty();
+        List<Coordinate> path2 = solver.solve(maze, new Coordinate(1, 1), new Coordinate(1001, 1001));
+        assertThat(path2).isNotEmpty();
     }
 
     @Test

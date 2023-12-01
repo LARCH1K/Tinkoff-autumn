@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class Task2Test {
     @Test
-    void testSearchDirectoriesWithMoreThan1000Files() throws IOException {
+    void searchDirectoriesWithMoreThan1000FilesTest() throws IOException {
         Path tempDir = Files.createTempDirectory("testSearchDirectoriesWithMoreThan1000Files");
         createDirectoriesWithMoreThan1000Files(tempDir, 3, 1001);
 
@@ -21,7 +21,7 @@ public class Task2Test {
     }
 
     @Test
-    void testSearchFilesWithASpecificExtensionAndSize() throws IOException {
+    void searchFilesWithASpecificExtensionAndSizeTest() throws IOException {
         Path tempDir = Files.createTempDirectory("testSearchFilesWithASpecificExtensionAndSize");
         createFilesWithExtensionAndSize(tempDir, "txt", 1024, 3);
 

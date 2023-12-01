@@ -4,11 +4,11 @@ import edu.project2.components.Cell;
 import edu.project2.components.Coordinate;
 import edu.project2.components.Maze;
 import edu.project2.solvers.Solver;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Deque;
 import java.util.List;
+import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -36,7 +36,7 @@ public class ParallelDFSSolver implements Solver {
 
         Coordinate[][] pathArr = new Coordinate[maze.getHeight()][maze.getWidth()];
         boolean[][] visited = new boolean[maze.getHeight()][maze.getWidth()];
-        Deque<Coordinate> deque = new ArrayDeque<>();
+        Deque<Coordinate> deque = new ConcurrentLinkedDeque<>();
         ExecutorService executorService = Executors.newFixedThreadPool(numThreads);
 
         visited[indexStart.row()][indexStart.col()] = true;
@@ -44,21 +44,16 @@ public class ParallelDFSSolver implements Solver {
 
         while (!deque.isEmpty()) {
             List<Future<Void>> futures = new ArrayList<>();
-            synchronized (deque) {
-                if (!deque.isEmpty()) {
-                    final Coordinate curr = deque.pop();
-                    futures.add(executorService.submit(() -> {
-                        List<Coordinate> neighbors = getNeighbors(maze, curr, visited);
-                        for (Coordinate neighbor : neighbors) {
-                            pathArr[neighbor.row()][neighbor.col()] = curr;
-                            visited[neighbor.row()][neighbor.col()] = true;
-                            deque.addLast(neighbor);
-                        }
-                        return null;
-                    }));
+            final Coordinate curr = deque.pop();
+            futures.add(executorService.submit(() -> {
+                List<Coordinate> neighbors = getNeighbors(maze, curr, visited);
+                for (Coordinate neighbor : neighbors) {
+                    pathArr[neighbor.row()][neighbor.col()] = curr;
+                    visited[neighbor.row()][neighbor.col()] = true;
+                    deque.addLast(neighbor);
                 }
-            }
-
+                return null;
+            }));
             for (Future<Void> future : futures) {
                 try {
                     future.get();
@@ -66,7 +61,6 @@ public class ParallelDFSSolver implements Solver {
                     throw new RuntimeException(e);
                 }
             }
-
         }
 
         executorService.shutdown();
