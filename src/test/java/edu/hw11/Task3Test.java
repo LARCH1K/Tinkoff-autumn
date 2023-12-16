@@ -1,9 +1,9 @@
 package edu.hw11;
 
 import edu.hw11.task3.ByteClassLoader;
+import java.lang.reflect.InvocationTargetException;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-import java.lang.reflect.InvocationTargetException;
 import static edu.hw11.task3.GeneratorFibonacciClass.generateFibonacciClass;
 
 public class Task3Test {
@@ -19,8 +19,8 @@ public class Task3Test {
         result = (long) fibonacciClass.getMethod("fib", int.class).invoke(null, 10);
         Assertions.assertEquals(55, result);
 
-       // result = (long) fibonacciClass.getMethod("fib", int.class).invoke(null, 47);
-        //Assertions.assertEquals(2971215073L, result);
+        result = (long) fibonacciClass.getMethod("fib", int.class).invoke(null, 47);
+        Assertions.assertEquals(2971215073L, result);
     }
 }
 
