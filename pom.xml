@@ -134,6 +134,8 @@
             <artifactId>byte-buddy</artifactId>
             <version>${bytebuddy.version}</version>
         </dependency>
+
+
     </dependencies>
 
     <build>
